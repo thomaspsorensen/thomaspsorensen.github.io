@@ -196,20 +196,22 @@ section{ padding-block:clamp(3.5rem, 9vh, 7rem); }
   border-left:3px solid var(--compass);
   padding:.5rem 0 .5rem .9rem; margin-bottom:2.4rem; max-width:60ch;
 }
-.timeline{ position:relative; padding-left:2.4rem; }
+.timeline{ --tl-pad:2.4rem; --tl-axis:8px; position:relative; padding-left:var(--tl-pad); }
 .timeline::before{            /* the vertical light bar (spine) */
-  content:""; position:absolute; left:7px; top:6px; bottom:6px; width:2px;
+  content:""; position:absolute; left:var(--tl-axis); top:6px; bottom:6px; width:2px;
+  transform:translateX(-50%);
   background:linear-gradient(180deg, var(--slate-500), var(--silver-300));
 }
-.role{ position:relative; padding-block:1.3rem; }
-.role::before{                /* stadium node */
-  content:""; position:absolute; left:-2.4rem; top:1.7rem;
+.role{ padding-block:1.3rem; }
+.role h3::before{             /* stadium node — on the spine's axis, centered on the title */
+  content:""; position:absolute; left:calc(var(--tl-axis) - var(--tl-pad)); top:50%;
+  transform:translate(-50%, -50%);
   width:16px; height:26px; border-radius:999px;
   border:2px solid var(--slate-500); background:var(--silver-050);
 }
 .role + .role{ border-top:1px solid var(--silver-300); }
 .role .yr{ color:var(--slate-500); display:block; margin-bottom:.35rem; }
-.role h3{ font-size:1.2rem; font-weight:700; }
+.role h3{ position:relative; font-size:1.2rem; font-weight:700; }
 .role .co{ color:var(--graphite-600); font-weight:400; }
 .role p{ margin-top:.4rem; color:var(--graphite-600); max-width:62ch; }
 
@@ -268,8 +270,7 @@ a:focus-visible, .stadium:focus-visible{
 @media (max-width:560px){
   .spec{ grid-template-columns:1fr; gap:.4rem; }
   .spec .k{ padding-top:0; }
-  .timeline{ padding-left:1.9rem; }
-  .role::before{ left:-1.9rem; }
+  .timeline{ --tl-pad:1.9rem; }
 }
 .note code{ font-family:var(--mono); font-size:.82em; background:var(--silver-100); padding:.05em .35em; border-radius:4px; }
 </style>
