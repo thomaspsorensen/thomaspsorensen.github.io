@@ -3,16 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>portfolio</title>
+<title>Thomas Sorensen · Technical Support Engineer</title>
+<meta name="description" content="Thomas Sorensen — Technical Support Engineer in AI and B2B SaaS, ex-Oura and Apple Genius Bar. Based in Mountain View, CA and open to new roles.">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://thomaspsorensen.github.io/">
+<meta property="og:title" content="Thomas Sorensen · Technical Support Engineer">
+<meta property="og:description" content="Technical Support Engineer in AI and B2B SaaS, ex-Oura and Apple Genius Bar. Open to new roles.">
+<meta name="twitter:card" content="summary">
+
+<!-- Favicon: the .logo shape as SVG (9×9 grid, silver on storm-900) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 13 13'%3E%3Crect x='-2' y='-2' width='13' height='13' rx='2.5' fill='%2314212A'/%3E%3Cg fill='%23F4F4F1' shape-rendering='crispEdges'%3E%3Crect x='0' y='0' width='2' height='1'/%3E%3Crect x='0' y='0' width='1' height='4'/%3E%3Crect x='3' y='0' width='3' height='1'/%3E%3Crect x='3' y='0' width='1' height='5'/%3E%3Crect x='5' y='0' width='1' height='3'/%3E%3Crect x='3' y='4' width='3' height='1'/%3E%3Crect x='5' y='4' width='1' height='5'/%3E%3Crect x='3' y='8' width='3' height='1'/%3E%3Crect x='3' y='6' width='1' height='3'/%3E%3Crect x='8' y='0' width='1' height='4'/%3E%3Crect x='7' y='3' width='2' height='1'/%3E%3C/g%3E%3C/svg%3E">
 
 <!--
   ============================================================
   THOMAS SORENSEN — personal site
-  Brand: "Storm" 
-  Signature devices:
-    1. The light bar  -> .lightbar 
-    2. The stadium oval -> .stadium / .monogram / timeline nodes (headlight shape)
-    3. Dashboard mono   -> .mono (all numerals, like the speedometer)
+  Recurring visual elements:
+    1. The light bar     -> .lightbar / .divider
+    2. The stadium oval  -> .stadium buttons and timeline nodes
+    3. Mono readout      -> .mono (years and labels)
   No frameworks, no build step, no JS. One web font (Lato). Edit tokens in :root.
   ============================================================
 -->
@@ -23,33 +32,33 @@
 
 <style>
 /* ============================================================
-   1. DESIGN TOKENS  (all colors sampled from the truck photos)
+   1. DESIGN TOKENS
    ============================================================ */
 :root{
   color-scheme: light;
 
-  /* --- Storm Blue family (the body paint) --- */
+  /* --- Storm blue family --- */
   --storm-900:#14212A;   /* deepest — hero & footer backgrounds        */
   --storm-800:#1B2C36;   /* dark section background                    */
-  --storm-700:#283B47;   /* true body blue, sampled — primary          */
-  --storm-600:#324957;   /* sunlit panel, sampled                      */
+  --storm-700:#283B47;   /* primary blue                               */
+  --storm-600:#324957;   /* lighter panel blue                         */
   --slate-500:#3F6076;   /* mid accent — links / accents on light      */
-  --slate-400:#6E8A9A;   /* muted blue-grey — secondary text on dark   */
+  --slate-400:#8AA3B1;   /* muted blue-grey — secondary text on dark (AA on storm-800/900) */
 
-  /* --- Silver body + light base --- */
+  /* --- Silver + light base --- */
   --silver-050:#F4F4F1;  /* page background (warm near-white)           */
   --silver-100:#ECECE8;
-  --silver-200:#DADAD8;  /* body silver, sampled — panels              */
+  --silver-200:#DADAD8;  /* panels                                     */
   --silver-300:#C6C7C3;  /* hairline borders on light                  */
 
-  /* --- Graphite cladding (dark neutral / text) --- */
-  --graphite-900:#1F2327; /* primary text on light, sampled ~#2A2A2A   */
+  /* --- Graphite (dark neutral / text) --- */
+  --graphite-900:#1F2327; /* primary text on light                     */
   --graphite-600:#4C5155; /* secondary text on light                   */
 
-  /* --- Compass Yellow (the single marker — use once) --- */
-  --compass:#ECC24E;      /* sampled from the fender marker            */
+  /* --- Compass yellow (the single accent — use once) --- */
+  --compass:#ECC24E;
 
-  --white:#FFFFFF;        /* LED glow                                   */
+  --white:#FFFFFF;        /* light-bar glow                             */
 
   /* --- Type --- */
   --sans: "Lato", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -89,8 +98,7 @@ img{ max-width:100%; display:block; }
 
 /* ============================================================
    3. SIGNATURE DEVICE — the light bar
-   (The LED bar across the front and rear of the truck.
-    A single glowing line, brightest in the middle, fading at both ends.)
+   (A single glowing line, brightest in the middle, fading at both ends.)
    ============================================================ */
 .lightbar{
   height:3px;
@@ -108,7 +116,7 @@ img{ max-width:100%; display:block; }
 .divider.on-dark{ background:linear-gradient(90deg, transparent, var(--slate-400), transparent); }
 
 /* ============================================================
-   4. HERO  (dark — the front of the truck powering on)
+   4. HERO
    ============================================================ */
 .hero{
   background:radial-gradient(120% 90% at 50% -10%, var(--storm-700), var(--storm-900) 70%);
@@ -119,8 +127,8 @@ img{ max-width:100%; display:block; }
 .hero .lightbar{ width:min(520px, 84vw); }
 
 /* Logo in pure CSS: one element, 11 solid rectangles drawn as background layers.
-   Scales to any width; recolor with `color`. The shape fills the element edge to edge
-   (Removed 9-2026). */
+   Scales to any width; recolor with `color`. The shape fills the element edge to edge.
+   Not on the page right now — the favicon (<link rel="icon"> in <head>) is an SVG copy of this shape. */
 .logo {
   display: inline-block;
   width: 144px;            /* set any size; height follows */
@@ -146,8 +154,9 @@ img{ max-width:100%; display:block; }
   line-height:.98;
   letter-spacing:.14em;             /* wide tracking — the wordmark feel */
   text-transform:uppercase;
-  margin-inline:-.14em;             /* optically re-center the tracked caps */
+  padding-left:.14em;               /* balance the tracking after the last letter so the name centers */
 }
+.taglines{ display:flex; flex-direction:column; align-items:center; gap:.35rem; }  /* title + subtitle */
 .tagline{
   max-width:36ch;
   font-weight:300;
@@ -156,8 +165,9 @@ img{ max-width:100%; display:block; }
 }
 .readout{ color:var(--slate-400); }
 .readout b{ color:var(--compass); font-weight:700; }   /* the one yellow marker */
+.dot{ opacity:.6; }                                     /* separator dots (hero readout + footer) */
 
-/* Stadium (pill) button — the headlight geometry as a control */
+/* Stadium (pill) button — the oval as a control */
 .stadium{
   display:inline-flex; align-items:center; gap:.6rem;
   padding:.85rem 1.6rem;
@@ -190,12 +200,7 @@ section{ padding-block:clamp(3.5rem, 9vh, 7rem); }
 /* ============================================================
    6. WORK HISTORY  — timeline on the light-bar spine
    ============================================================ */
-.note{
-  font-size:.85rem; color:var(--graphite-600);
-  border-left:3px solid var(--compass);
-  padding:.5rem 0 .5rem .9rem; margin-bottom:2.4rem; max-width:60ch;
-}
-.timeline{ --tl-pad:2.4rem; --tl-axis:8px; position:relative; padding-left:var(--tl-pad); }
+.timeline{ --tl-pad:2.4rem; --tl-axis:8px; position:relative; padding-left:var(--tl-pad); overflow-x:visible; overflow-y:clip; }  /* clip vertically only, so nodes aren't cut off */
 .timeline::before{            /* the vertical light bar (spine) */
   content:""; position:absolute; left:var(--tl-axis); top:6px; bottom:6px; width:2px;
   transform:translateX(-50%);
@@ -207,6 +212,12 @@ section{ padding-block:clamp(3.5rem, 9vh, 7rem); }
   transform:translate(-50%, -50%);
   width:16px; height:26px; border-radius:999px;
   border:2px solid var(--slate-500); background:var(--silver-050);
+  z-index:1;
+}
+.role:last-child h3::after{   /* hide the spine below the last node (clipped by .timeline) */
+  content:""; position:absolute; left:calc(var(--tl-axis) - var(--tl-pad)); top:50%;
+  transform:translateX(-50%);
+  width:6px; height:100vh; background:var(--silver-050);
 }
 .role + .role{ border-top:1px solid var(--silver-300); }
 .role .yr{ color:var(--slate-500); display:block; margin-bottom:.35rem; }
@@ -215,7 +226,7 @@ section{ padding-block:clamp(3.5rem, 9vh, 7rem); }
 .role p{ margin-top:.4rem; color:var(--graphite-600); max-width:62ch; }
 
 /* ============================================================
-   7. "WORKING WITH ME" — spec sheet (like a vehicle spec table)
+   7. "WORKING WITH ME" — spec sheet (used by the commented-out section)
    ============================================================ */
 .specs{ display:grid; gap:0; border-top:1px solid rgba(255,255,255,.14); }
 .spec{
@@ -227,7 +238,7 @@ section{ padding-block:clamp(3.5rem, 9vh, 7rem); }
 .spec .v b{ font-weight:700; color:var(--white); }
 
 /* ============================================================
-   8. CONTACT / FOOTER  (rear of the truck — full-width light bar)
+   8. CONTACT / FOOTER  (full-width light bar)
    ============================================================ */
 .foot{ background:var(--storm-900); color:var(--silver-100); padding-block:clamp(3rem,8vh,6rem); }
 .foot .bar-full{
@@ -238,7 +249,6 @@ section{ padding-block:clamp(3.5rem, 9vh, 7rem); }
 .foot h2{ font-weight:900; font-size:clamp(1.6rem,4.5vw,2.4rem); letter-spacing:.02em; }
 .foot .email{ display:inline-block; margin-top:1rem; font-size:clamp(1.05rem,2.8vw,1.5rem); color:var(--silver-050); font-weight:700;overflow-wrap:anywhere;}
 .foot .meta{ margin-top:2.4rem; color:var(--slate-400); display:flex; gap:.6rem; flex-wrap:wrap; align-items:center; }
-.foot .meta .dot{ opacity:.5; }
 
 /* ============================================================
    9. THE ONE MOTION MOMENT — power-on sequence on load
@@ -247,9 +257,8 @@ section{ padding-block:clamp(3.5rem, 9vh, 7rem); }
 @keyframes riseIn{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
 
 .hero .lightbar{ transform-origin:center; animation:barOn .8s cubic-bezier(.22,1,.36,1) .15s both; }
-.hero .monogram{ animation:riseIn .6s ease .8s both; }
 .hero .wordmark{ animation:riseIn .6s ease .95s both; }
-.hero .tagline{  animation:riseIn .6s ease 1.1s both; }
+.hero .taglines{ animation:riseIn .6s ease 1.1s both; }
 .hero .readout{  animation:riseIn .6s ease 1.2s both; }
 .hero .cta-row{  animation:riseIn .6s ease 1.3s both; }
 
@@ -270,8 +279,9 @@ a:focus-visible, .stadium:focus-visible{
   .spec{ grid-template-columns:1fr; gap:.4rem; }
   .spec .k{ padding-top:0; }
   .timeline{ --tl-pad:1.9rem; }
+  .foot .meta{ flex-direction:column; align-items:flex-start; gap:.3rem; }
+  .foot .meta .dot{ display:none; }
 }
-.note code{ font-family:var(--mono); font-size:.82em; background:var(--silver-100); padding:.05em .35em; border-radius:4px; }
 </style>
 </head>
 
@@ -285,10 +295,12 @@ a:focus-visible, .stadium:focus-visible{
 
     <div class="lightbar" aria-hidden="true"></div>
 
-    <p class="tagline">Technical Support Engineer</p>
-    <p class="tagline">AI and B2B SaaS, ex-Oura and Apple Genius Bar.</p>
+    <div class="taglines">
+      <p class="tagline">Technical Support Engineer</p>
+      <p class="tagline">AI and B2B SaaS, ex-Oura and Apple Genius Bar.</p>
+    </div>
 
-    <p class="mono readout">Mountain View, CA <span class="dot">· </span><b>Open to new roles</b></p>
+    <p class="mono readout">Mountain View, CA <span class="dot">·</span> <b>Open to new roles</b></p>
 
     <div class="cta-row">
       <a class="stadium solid" href="#work">View experience</a>
@@ -353,7 +365,7 @@ a:focus-visible, .stadium:focus-visible{
     <div class="sec-head">
       <div class="divider" aria-hidden="true"></div>
       <span class="mono sec-index">02 / Education</span>
-      <h2 class="sec-title">Degrees & training</h2>
+      <h2 class="sec-title">Degrees &amp; training</h2>
     </div>
 
     <div class="timeline">
@@ -367,24 +379,22 @@ a:focus-visible, .stadium:focus-visible{
       </article>
 
       <article class="role">
-        <h3>University of Wisconsin-Madison <span class="co">· B.A., Theatre &amp; Drama</span></h3>
+        <h3>University of Wisconsin&#8288;–&#8288;Madison <span class="co">· B.A., Theatre &amp; Drama</span></h3>
         <p>Bachelor of Arts in Theatre and Drama, plus a Certificate in Integrated Liberal Studies.</p>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ==================== WORKING WITH ME (placeholder) ==================== -->
-<!-- 
+<!-- ==================== WORKING WITH ME (hidden for now) ==================== -->
+<!--
 <section id="working" class="dark">
   <div class="wrap">
     <div class="sec-head">
       <div class="divider on-dark" aria-hidden="true"></div>
-      <span class="mono sec-index">02 / Operating specs</span>
+      <span class="mono sec-index">03 / Operating specs</span>
       <h2 class="sec-title">What it's like to work with me</h2>
     </div>
-
-    <p class="note" style="color:var(--slate-400);border-color:var(--compass)">Placeholder — draft your own principles or delete this section.</p>
 
     <div class="specs">
       <div class="spec"><span class="mono k">Default mode</span><span class="v"><b>Act, don't ask.</b> If it's reversible and cheap, I do it and tell you.</span></div>
@@ -401,7 +411,7 @@ a:focus-visible, .stadium:focus-visible{
     <div class="bar-full" aria-hidden="true"></div>
     <h2>Let's talk.</h2>
     <a class="email" href="mailto:thomassorensensuccessengineer@gmail.com">thomassorensensuccessengineer@gmail.com</a>
-    <p class="mono meta">Thomas Sorensen <span class="dot">·</span> Customer Success Engineer <span class="dot">·</span> Mountain View, CA</p>
+    <p class="mono meta">Thomas Sorensen <span class="dot">·</span> Technical Support Engineer <span class="dot">·</span> Mountain View, CA</p>
   </div>
 </footer>
 
